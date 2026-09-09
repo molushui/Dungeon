@@ -1,0 +1,31 @@
+[gd_scene format=3 uid="uid://ddy3fo57vobbl"]
+
+[ext_resource type="Texture2D" uid="uid://bx82i2wa6fg71" path="res://eye_red.png" id="1_0bnu1"]
+[ext_resource type="Script" uid="uid://cgtq6vs83lkgh" path="res://boss.gd" id="1_6xxrv"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_n3mn5"]
+radius = 55.00909
+
+[node name="Boss" type="CharacterBody2D" unique_id=579428876]
+position = Vector2(583, 389)
+script = ExtResource("1_6xxrv")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=613733394]
+texture = ExtResource("1_0bnu1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1009955289]
+position = Vector2(-1, -6)
+shape = SubResource("CircleShape2D_n3mn5")
+
+[node name="HealthBarBg" type="ColorRect" parent="." unique_id=1106966527]
+offset_left = -58.0
+offset_top = -80.0
+offset_right = 62.0
+offset_bottom = -70.0
+color = Color(0.2, 0.2, 0.2, 1)
+
+[node name="HealthBarFill" type="ColorRect" parent="HealthBarBg" unique_id=1971636223]
+layout_mode = 0
+offset_right = 120.0
+offset_bottom = 10.0
+color = Color(0.8495601, 1.9974261e-06, 3.85046e-07, 1)

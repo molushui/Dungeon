@@ -1,0 +1,58 @@
+[gd_scene format=3 uid="uid://dyvb7dpys8xb7"]
+
+[ext_resource type="Script" uid="uid://dxry7mvglme7t" path="res://menu.gd" id="1_lti8b"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_yomrw"]
+font_size = 60
+
+[node name="Menu" type="CanvasLayer" unique_id=1706346577]
+process_mode = 3
+script = ExtResource("1_lti8b")
+
+[node name="Bg" type="ColorRect" parent="." unique_id=775731263]
+offset_right = 1150.0
+offset_bottom = 650.0
+color = Color(0.117109306, 0.11710932, 0.117109306, 1)
+
+[node name="Title" type="Label" parent="." unique_id=261206448]
+offset_left = 350.0
+offset_top = 132.0
+offset_right = 818.0
+offset_bottom = 215.0
+text = "Dungeon"
+label_settings = SubResource("LabelSettings_yomrw")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PlayButton" type="Button" parent="." unique_id=1748196236]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -64.0
+offset_top = -4.0
+offset_right = 64.0
+offset_bottom = 46.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 38
+text = "开始游戏"
+
+[node name="QuitButton" type="Button" parent="." unique_id=1588079411]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -80.0
+offset_top = 66.0
+offset_right = 80.0
+offset_bottom = 127.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 38
+text = "退出游戏"
+
+[connection signal="pressed" from="PlayButton" to="." method="_on_play_button_pressed"]
+[connection signal="pressed" from="QuitButton" to="." method="_on_quit_button_pressed"]
