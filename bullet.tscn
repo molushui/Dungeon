@@ -6,6 +6,7 @@
 size = Vector2(12, 12)
 
 [node name="Bullet" type="Area2D" unique_id=1218544240]
+collision_mask = 3
 script = ExtResource("1_v7oki")
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=1660040290]

@@ -19,7 +19,7 @@ var is_dashing:bool = false
 @onready var health_bar_fill: ColorRect = $HealthBarBg/HealthBarFill
 @onready var sprite: Sprite2D = $Sprite2D
 
-@onready var bullet_scene = preload("res://bullet.tscn")
+@onready var bullet_scene = preload("res://bossbullet.tscn")
 
 
 func _ready() -> void:
@@ -86,6 +86,7 @@ func _physics_process(delta: float) -> void:
 					bullet.damage = 1
 					# 让子弹变为“敌方子弹”，需要单独处理
 				current_state = AttackState.IDLE
+				print("boss发射了子弹")
 				state_timer = 0.0
 				
 		AttackState.IDLE:

@@ -8,6 +8,7 @@ radius = 55.00909
 
 [node name="Boss" type="CharacterBody2D" unique_id=579428876]
 position = Vector2(583, 389)
+collision_layer = 2
 script = ExtResource("1_6xxrv")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=613733394]

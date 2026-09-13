@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://d1s6b8ulken0h"]
+
+[ext_resource type="Script" uid="uid://cajltdyevjcx2" path="res://bossbullet.gd" id="1_jpejh"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yomrw"]
+size = Vector2(12, 12)
+
+[node name="BossBullet" type="CharacterBody2D" unique_id=1311664409]
+visible = false
+z_index = -1
+collision_layer = 4
+script = ExtResource("1_jpejh")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1660040290]
+offset_right = 12.0
+offset_bottom = 12.0
+color = Color(0.8605208, 0.7116613, 0, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1270578500]
+position = Vector2(6, 6)
+shape = SubResource("RectangleShape2D_yomrw")

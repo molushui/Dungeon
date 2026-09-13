@@ -70,6 +70,7 @@ func _physics_process(_delta: float) -> void:
 func shoot():
 	# 1. 创建一颗子弹
 	var bullet = bullet_scene.instantiate()
+	bullet.add_to_group("bullets")
 	# 2. 把子弹放到当前场景Main下
 	get_parent().add_child(bullet)
 	# 3. 子弹出生在玩家位置
@@ -89,6 +90,7 @@ func take_damage(damage: int = 1) -> void:
 		
 	hp -= damage
 	print("❤️ 剩余血量：",hp) # 在控制台显示
+	update_ui()
 	
 	# 更新UI文字
 	#hp_label.text = "❤".repeat(hp)
@@ -98,6 +100,8 @@ func take_damage(damage: int = 1) -> void:
 	is_invincible = true
 	await get_tree().create_timer(0.5).timeout
 	is_invincible = false
+	
+	
 	
 	# 血量归零时，游戏结束
 	if hp <= 0:

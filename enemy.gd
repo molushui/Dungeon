@@ -10,6 +10,8 @@ extends CharacterBody2D
 var hp:int = 1
 var max_hp:int = 1
 
+var is_dead:bool = false
+
 
 
 func _physics_process(delta: float) -> void:
@@ -42,12 +44,17 @@ func _physics_process(delta: float) -> void:
 
 # 掉血函数
 func take_damage(damage:int) -> void:
+	if is_dead:
+		return
+		
 	hp -= damage
-	# 受伤闪白效果（视觉反馈，先留个借口）
+	# 受伤闪白效果（视觉反馈，先留个借口)
 	if hp <= 0:
+		is_dead = true # 标记怪已死亡，避免重复调用die()
 		die()
 		
 func die() -> void:
+	print("💀 ", name, " 死亡，通知计数器")
 	if room_manager:
 		room_manager.on_enemy_died()
 		# 销毁自己

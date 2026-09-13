@@ -42,11 +42,22 @@ func next_room() -> void:
 	# 更新右上角楼层显示
 	if room_label:
 		room_label.text = "第" + str(current_room) + "层"
+		
+	await get_tree().process_frame   #  延迟一帧
 	
 	# 清理上一层残留敌人
 	for child in main.get_children():
 		if child is CharacterBody2D and child != player and child.is_in_group("enemies"):
 			child.queue_free()
+	
+	await get_tree().process_frame   #  延迟一帧
+	
+	# 清理上一层残留子弹
+	for child in main.get_children():
+		if child is Area2D and child.is_in_group("bullets"):
+			child.queue_free()
+	 
+	await get_tree().create_timer(0.3).timeout   # 延迟0.3秒
 	
 	# 若进入第 5 层，判断为 BOSS 层，退出函数
 	if current_room == 5:
@@ -126,7 +137,7 @@ func on_enemy_died() -> void:
 		player.gain_exp(exp_reward)
 	
 	# 敌人死光时
-	if enemies_alive == 0:
+	if enemies_alive <= 0:
 		# 等待一秒后（模拟门开），进入下一层
 		await get_tree().create_timer(1.0).timeout
 		next_room()
