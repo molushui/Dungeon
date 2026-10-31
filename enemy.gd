@@ -39,6 +39,9 @@ func _physics_process(delta: float) -> void:
 		if collider.name == "Player":
 			# 调用玩家的受伤函数
 			collider.take_damage(1)
+			is_dead = true
+			if room_manager:
+				room_manager.on_enemy_died()
 			# 敌人消失（牺牲）
 			queue_free()
 
@@ -59,6 +62,12 @@ func die() -> void:
 		room_manager.on_enemy_died()
 		# 销毁自己
 		queue_free()
+		
+		# 给玩家加经验(基础1点，随层数增加）
+	if player:
+		var exp_reward = room_manager.current_room
+		player.gain_exp(exp_reward)
+
 
 ## 当敌人从场景中被移除，自动调用该函数	
 #func _exit_tree() ->void:

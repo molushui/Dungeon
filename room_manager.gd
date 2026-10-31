@@ -131,13 +131,10 @@ func on_enemy_died() -> void:
 		
 	enemies_alive -= 1
 	total_kills += 1 # 杀敌计数器
-	# 给玩家加经验(基础1点，随层数增加）
-	if player:
-		var exp_reward = 1 + ( current_room - 1 )
-		player.gain_exp(exp_reward)
+
 	
 	# 敌人死光时
-	if enemies_alive <= 0:
+	if enemies_alive == 0:
 		# 等待一秒后（模拟门开），进入下一层
 		await get_tree().create_timer(1.0).timeout
 		next_room()

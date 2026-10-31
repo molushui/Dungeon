@@ -7,6 +7,7 @@
 [ext_resource type="Script" uid="uid://dnmnu6j6wwq5v" path="res://room_manager.gd" id="5_lquwl"]
 [ext_resource type="PackedScene" uid="uid://dyvb7dpys8xb7" path="res://menu.tscn" id="6_7mycd"]
 [ext_resource type="PackedScene" uid="uid://ddy3fo57vobbl" path="res://boss.tscn" id="6_272bh"]
+[ext_resource type="Script" uid="uid://b7j7llyax7yha" path="res://sound_manager.gd" id="8_5vw27"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_c5ne1"]
 size = Vector2(97, 77)
@@ -233,9 +234,40 @@ offset_bottom = 466.0
 text = "按 R 重新开始"
 label_settings = SubResource("LabelSettings_c5ne1")
 
+[node name="PauseBg" type="ColorRect" parent="UI" unique_id=1285373961]
+visible = false
+offset_right = 900.0
+offset_bottom = 644.0
+color = Color(0, 0, 0, 0.6627451)
+
+[node name="Pause" type="Label" parent="UI/PauseBg" unique_id=1026473944]
+layout_mode = 0
+offset_left = 324.0
+offset_top = 289.0
+offset_right = 574.0
+offset_bottom = 358.0
+theme_override_font_sizes/font_size = 50
+text = "游戏已暂停"
+
+[node name="space" type="Label" parent="UI/PauseBg" unique_id=1516507179]
+layout_mode = 0
+offset_left = 335.0
+offset_top = 413.0
+offset_right = 575.0
+offset_bottom = 455.0
+theme_override_font_sizes/font_size = 25
+text = "按空格键继续游戏"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="RoomManager" type="Node" parent="." unique_id=43247947]
 script = ExtResource("5_lquwl")
 enemy_scene = ExtResource("3_h2yge")
 boss_scene = ExtResource("6_272bh")
 
 [node name="Menu" parent="." unique_id=1706346577 instance=ExtResource("6_7mycd")]
+visible = false
+
+[node name="SoundManager" type="Node" parent="." unique_id=1640877319]
+process_mode = 3
+script = ExtResource("8_5vw27")

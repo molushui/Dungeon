@@ -7,6 +7,7 @@ var damage: int = 1
 var bounce_left: int = 3  # 最多反弹 3 次
 
 func _ready() -> void:
+	visible = true
 	# 3 s后子弹自动消失
 	await get_tree().create_timer(3.0).timeout   # 延迟 3 秒
 	queue_free()

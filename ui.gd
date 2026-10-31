@@ -6,11 +6,33 @@ extends CanvasLayer
 @onready var hp_label: Label = $HP
 @onready var win_bg: ColorRect = $WinBg
 @onready var state_label: Label = $WinBg/StateLabel
+@onready var sound_manager: Node = $"../SoundManager"
+@onready var pause_bg: ColorRect = $PauseBg
+@onready var game_over_bg: ColorRect = $GameOverBg
+@onready var hp: Label = $HP
+@onready var room_label: Label = $RoomLabel
+@onready var exp_bar_bg: ColorRect = $ExpBarBg
+
+@onready var menu: CanvasLayer = $"../Menu"
+
+
 
 
 var flash_time: float = 0 # 重新游戏闪烁间隔秒数
 
-@warning_ignore("unused_parameter")
+#@warning_ignore("unused_parameter")
+
+func _ready() -> void:
+	pause_bg.visible = false
+	win_bg.visible = false
+	game_over_bg.visible = false
+	
+	level_label.visible = true
+	hp.visible = true
+	room_label.visible = true
+	exp_bar_bg.visible = true
+	
+	
 func update_player_ui(hp:int,max_hp:int,level:int,exp_val:int,max_exp:int) -> void:
 	# 更新HP
 	hp_label.text = "❤".repeat(hp)
@@ -25,15 +47,29 @@ func update_player_ui(hp:int,max_hp:int,level:int,exp_val:int,max_exp:int) -> vo
 	exp_bar_fill.size.x = 200 * percent # 经验值增长（经验条总宽200像素）
 	
 
-# 接收R键输入
+# 接收输入
 func _unhandled_input(event: InputEvent) -> void:
 	#print("⚡ 收到输入事件: ", event) 
-	# 如果游戏处于暂停且按下了 R 键
+	
+	# R键 复位游戏
 	if event.is_action_pressed("ui_restart"):
+		GameMenu.skip_menu = true
 		# 恢复游戏
 		get_tree().paused = false
 		# 重新加载场景
 		get_tree().reload_current_scene()
+
+		
+	# space键暂停游戏
+	if event.is_action_pressed("pause"):
+		if get_tree().paused == false: # 暂停
+			pause_bg.visible = true
+			get_tree().paused = true
+		else:						   # 继续
+			pause_bg.visible = false
+			get_tree().paused = false
+
+	
 		
 func _process(delta: float) -> void:
 	# 只在GAME OVER里闪烁
@@ -62,6 +98,8 @@ func win(time: float , enemies_killed:int , level:int) ->void:
 	state_label.text = "通关用时：" + str(round(time)) + \
 					   "s\n杀敌数：" + str(enemies_killed) + \
 					   "\n等级：" + str(level)
+					
+	sound_manager.play("victory")
 	# 暂停游戏(所有物理和输入都停止)
 	get_tree().paused = true
 	

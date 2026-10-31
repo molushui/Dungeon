@@ -6,8 +6,6 @@
 size = Vector2(12, 12)
 
 [node name="BossBullet" type="CharacterBody2D" unique_id=1311664409]
-visible = false
-z_index = -1
 collision_layer = 4
 script = ExtResource("1_jpejh")
 
